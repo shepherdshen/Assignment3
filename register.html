@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>User register</h2>
+<hr>
+<form action="register.php" method="POST" enctype="multipart/form-data">
+   	User name:
+    <input type="text" name="userName" size="20" maxlength="15">
+    <br>
+
+   	Password:
+    <input type="password" name="password" size="20" maxlength="15">
+    <br>
+    
+    Confirm password:
+    <input type="password" name="confirmPassword" size="20" maxlength="15">
+    <br>
+
+   	Gender:
+    <input type="radio" name="gender" value="male" checked>Male
+    <input type="radio" name="gender" value="female">Female
+    <br>
+
+    Your hobbies:
+    <input name="interests[]" type="checkbox" value="music">Music
+    <input name="interests[]" type="checkbox" value="game">Game
+    <input name="interests[]" type="checkbox" value="film">Film
+    <br>
+
+    Picture:
+    <input type="hidden" name="MAX_FILE_SIZE" value="1024">
+    <input type="file" name="myPicture" size="25" maxlength="100">
+    <br>
+
+    Text:
+    <textarea name="remark" cols="30" rows="4" placeholder="Write anything you like"></textarea>
+    <br>
+
+    <input type="submit" name="submit" value="Register">
+    <input type="reset" name="cancel" value="Clear">
+</form>
+</body>
+</html>
