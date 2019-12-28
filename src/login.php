@@ -1,8 +1,11 @@
 <?php
-include_once ("connect.php");
-session_start(); /* ¿ªÆô»á»° */
+session_start();
 
-if (isset($_POST['login'])) { // µÇÂ¼
+require_once ("Connect.php");
+$connection = new Connect();
+$conn = $connection ->connectDB();
+
+if (isset($_POST['login'])) { // login function
     $userName = stripslashes(trim($_POST['userName']));
     $password = stripslashes(trim($_POST['password']));
     if (empty($userName)) {
@@ -15,7 +18,7 @@ if (isset($_POST['login'])) { // µÇÂ¼
     }
 
     $sql = "select userName,password from user where userName = '$_POST[userName]' and password = '$_POST[password]'";
-    $result = mysqli_query($conn,$sql);
+    $result = $connection->query($conn,$sql);
     $number = mysqli_num_rows($result);
     if ($number > 0) {
         $_SESSION['userName']=$userName;
@@ -23,7 +26,7 @@ if (isset($_POST['login'])) { // µÇÂ¼
     } else {
         echo '<script>alert("Wrong username or password£¡");history.go(-1);</script>';
     }
-} elseif (isset($_POST['logout'])) { // ÍË³ö
+} elseif (isset($_POST['logout'])) { // logout function(not implement)
     unset($_SESSION);
     session_destroy();
     echo '1';

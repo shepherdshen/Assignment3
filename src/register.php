@@ -1,8 +1,10 @@
 <?php
-include_once ("fileSystem.php");
-include_once ("connect.php");
+require_once ("fileSystem.php");
+require_once ("Connect.php");
+$connection = new Connect();
+$conn = $connection ->connectDB();
 
-//post
+//get posts from register.html
 $userName = $_POST['userName'];
 $password = $_POST['password'];
 $confirmPassword = $_POST['confirmPassword'];
@@ -12,57 +14,58 @@ $myPictureName = $_FILES['myPicture']["name"];
 
 //validation
 if (empty($_POST)) {
-    exit("您提交的表单数据超过post_max_size! <br>");
+    echo '<script>alert("Your data is over post_max_sizem please try again");history.go(-1);</script>';
+    exit(0);
 }
 if ($userName == '') {
-    echo '<script>alert("Input your username！");history.go(-1);</script>';
+    echo '<script>alert("Please input your username!");history.go(-1);</script>';
     exit(0);
 }
-if ($password == '') {
-    echo '<script>alert("input password");history.go(-1);</script>';
-    exit(0);
-}
-// 判断输入密码与确认密码是否相同
-if ($password != $confirmPassword) {
-    echo '<script>alert("password not the same");history.go(-1);</script>';
-    exit(0);
-}
-// 判断用户名是否重复
+// check if username is occupied
 $userNameSQL = "select * from user where userName = '$userName'";
-$resultSet = mysqli_query($conn, $userNameSQL);
+$resultSet = $connection->query($conn, $userNameSQL);
 if (mysqli_num_rows($resultSet) > 0) {
-    echo '<script>alert("Username has been occupied");history.go(-1);</script>';
+    echo '<script>alert("The username is occupied");history.go(-1);</script>';
     exit(0);
 } else {
-    echo "good name";
+    echo "good name<br>";
 }
-
+if ($password == '') {
+    echo '<script>alert("Please input your password!");history.go(-1);</script>';
+    exit(0);
+}
+// check if password is confirmed 
+if ($password != $confirmPassword) {
+    echo '<script>alert("Password and Confirm password are different!");history.go(-1);</script>';
+    exit(0);
+}
+//collect interests as a string
 if (empty($_POST['interests'])) {
     $interests = "";
 } else {
     $interests = implode(";", $_POST['interests']);
 }
 
+//uploads user information to database
 $registerSQL = "insert into user values(null, '$userName', '$password', '$gender', '$interests', '$myPictureName', '$remark')";
 $message = upload($_FILES['myPicture'], "uploads");
-
-if ($message == "上传成功" || $message == "没有上传") {
-    mysqli_query($conn, $registerSQL);
+if ($message == "upload complete" || $message == "no upload") {
+    $connection->query($conn, $registerSQL);
     $userID = mysqli_insert_id($conn);
     echo "register succeed<br>";
 } else {
     exit($message);
 }
 
-$userSQL = "select * from user where user_id = '$userID'";
-$userResult = mysqli_query($conn, $userSQL);
-if ($user = mysqli_fetch_array($userResult)) {
-    echo "Your username is：" . $user['userName'];
+$userSQL = "select * from user where id = '$userID'";
+$userResult = $connection->query($conn, $userSQL);
+if ($user = mysqli_fetch_array($userResult,MYSQLI_ASSOC)) {
+    echo "Your username is:" . $user['userName'];
 } else {
     exit("register failed！");
 }
 
-mysqli_free_result($resultSet);
-mysqli_free_result($userResult);
-mysqli_close($conn);
-
+//close db
+// mysqli_free_result($resultSet);
+// mysqli_free_result($userResult);
+$connection->closeDB($conn);

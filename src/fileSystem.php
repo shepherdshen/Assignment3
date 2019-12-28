@@ -1,4 +1,5 @@
 <?php
+//uploads picture file
 function upload($file, $filePath) {
     $error = $file['error'];
     switch ($error) {
@@ -7,15 +8,15 @@ function upload($file, $filePath) {
             $fileTemp = $file['tmp_name'];
             $destination = $filePath . "/" . $fileName;
             move_uploaded_file($fileTemp, $destination);
-            return "上传成功";
+            return "upload complete";
         case 1:
-            return "上传超过upload_max_filesize";
+            return "picture error: The file is too large for server";
         case 2:
-            return "上传文件超过form的MAX_FILE_SIZE";
+            return "picture error: The file is too large in the form";
         case 3:
-            return "附件部分上传";
+            return "picture error: The file is only partially uploaded";
         case 4:
-            return "没有上传";
+            return "no upload";
     }
 }
 ?>
