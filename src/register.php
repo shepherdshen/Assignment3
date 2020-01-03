@@ -1,7 +1,9 @@
 <?php
+session_start();
+
 require_once ("fileSystem.php");
-require_once ("Connect.php");
-$connection = new Connect();
+require_once ("dbConnector.php");
+$connection = new dbConnector();
 $conn = $connection ->connectDB();
 
 //get posts from register.html
@@ -22,13 +24,10 @@ if ($userName == '') {
     exit(0);
 }
 // check if username is occupied
-$userNameSQL = "select * from user where userName = '$userName'";
-$resultSet = $connection->query($conn, $userNameSQL);
+$resultSet = $connection->confirmUserName($conn, $userName);
 if (mysqli_num_rows($resultSet) > 0) {
     echo '<script>alert("The username is occupied");history.go(-1);</script>';
     exit(0);
-} else {
-    echo "good name<br>";
 }
 if ($password == '') {
     echo '<script>alert("Please input your password!");history.go(-1);</script>';
@@ -47,25 +46,16 @@ if (empty($_POST['interests'])) {
 }
 
 //uploads user information to database
-$registerSQL = "insert into user values(null, '$userName', '$password', '$gender', '$interests', '$myPictureName', '$remark')";
-$message = upload($_FILES['myPicture'], "uploads");
+$fileS = new fileSystem();
+$message = $fileS ->upload($_FILES['myPicture'], "uploads");
 if ($message == "upload complete" || $message == "no upload") {
-    $connection->query($conn, $registerSQL);
-    $userID = mysqli_insert_id($conn);
-    echo "register succeed<br>";
+    $connection->insertUserInfo($conn,$userName,$password,$gender,$interests,$myPictureName,$remark);
+//     echo "register your picture complete<br>";
 } else {
     exit($message);
 }
 
-$userSQL = "select * from user where id = '$userID'";
-$userResult = $connection->query($conn, $userSQL);
-if ($user = mysqli_fetch_array($userResult,MYSQLI_ASSOC)) {
-    echo "Your username is:" . $user['userName'];
-} else {
-    exit("register failed£¡");
-}
+$_SESSION['userName']=$userName;
+echo '<script>window.location="registered.php";</script>';
 
-//close db
-// mysqli_free_result($resultSet);
-// mysqli_free_result($userResult);
 $connection->closeDB($conn);

@@ -23,7 +23,6 @@
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript" src="my.js"></script>
 </body>
 </html>
 <?php
