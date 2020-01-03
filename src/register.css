@@ -1,0 +1,13 @@
+.body {
+    background-image: url("image/sky.jpg");
+    text-align: left;
+}
+
+.form {
+    background-color: whitesmoke;
+    text-align: left;
+    
+}
+.form h2 {
+    font-size: 90%;
+}
