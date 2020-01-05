@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
-	<div id="login">
+	<div class="login">
 		<h3>User login</h3>
 		<form action="login.php" method="post">
 		<div id="login_form">
@@ -26,3 +27,4 @@
 </body>
 </html>
 <?php
+ 
