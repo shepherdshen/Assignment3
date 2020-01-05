@@ -157,50 +157,50 @@
 <?php
 // The main page after login
 session_start();
-
-require_once ("dbConnector.php");
-
-$userName = $_SESSION['userName'];   //need refactor
+$userName = $_SESSION['userName']; // need refactor
 echo "hello,";
 echo $userName;
 
+// function Output() to display all secrets
+require_once ("dbConnector.php");
 global $connection;
 $connection = new dbConnector();
 global $conn;
-$conn = $connection ->connectDB();
+$conn = $connection->connectDB();
 $number = mysqli_num_rows($connection->querySecret($conn));
 $GLOBALS['i'] = $number;
-function Output(){
-    global $connection,$conn;
+
+function Output()
+{
+    if ($GLOBALS['i'] <= 0) {
+        exit();
+    }
+    global $connection, $conn;
     $resultUserName = $connection->queryUserName($conn, $GLOBALS['i']);
-    while ($row = mysqli_fetch_assoc($resultUserName))
-    {
+    while ($row = mysqli_fetch_assoc($resultUserName)) {
         $resultAnonymous = $connection->queryAnonymous($conn, $GLOBALS['i']);
-        while ($rowAnonymous = mysqli_fetch_assoc($resultAnonymous))
-        {
+        while ($rowAnonymous = mysqli_fetch_assoc($resultAnonymous)) {
             $anonymous = $rowAnonymous['anonymous'];
-            if($anonymous == "yes"){
+            if ($anonymous == "yes") {
                 echo "Username : Anonymous<br>";
-            }
-            else 
+            } else
                 echo "Username : {$row['user_name']} <br>";
         }
     }
-    
+
     $resultSecret = $connection->querySecretById($conn, $GLOBALS['i']);
-    while ($row = mysqli_fetch_assoc($resultSecret))
-    {
+    while ($row = mysqli_fetch_assoc($resultSecret)) {
         echo "Secret: {$row['secret_content']} <br>";
     }
-    echo $GLOBALS['i']; //can be hidden
-    $GLOBALS['i']--;
+    echo $GLOBALS['i']; // can be hidden
+    $GLOBALS['i'] --;
 }
 ?>
 
 
 </div>
 	<div class="filter">
-		<form>
+		<form action=filter.php method="POST">
 			<table align="center">
 				<caption>Filter</caption>
 				<tr>
@@ -236,7 +236,7 @@ function Output(){
 		<div class="box_1">
 			<span><?php Output(); ?></span>
 		</div>
-	
+
 		<div class="box_2">
 			<span><?php Output(); ?></span>
 		</div>
