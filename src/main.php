@@ -116,6 +116,6 @@ echo $userName;
 			<input type="submit" value="Create" class="crebtn">
 		</form>
 	</div>
-
+	
 </body>
 </html>
