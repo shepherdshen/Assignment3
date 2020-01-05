@@ -194,6 +194,7 @@ echo $userName;
 			<input type="submit" value="Create" class="crebtn">
 		</form>
 	</div>
+
 	<div class = "box">
 	<div class = "box_1"></div>
 	<div class = "box_2"></div>
@@ -206,6 +207,7 @@ echo $userName;
 	<div class = "box_9"></div>
 	<div class = "box_10"></div>
 	</div>
+
 
 </body>
 </html>

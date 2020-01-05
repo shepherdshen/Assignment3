@@ -43,7 +43,7 @@ echo $userName;
 ?>
 </div>
 <div class = "text">
-<form action="">
+<form action="create_process.php" method="POST" enctype="multipart/form-data">
 <textarea name="message" rows="10" cols="150"></textarea><br>
 <input type="checkbox" name="anonymous" value="Anonymous">Anonymous<br>
 <input type="submit" value="Submit" class="btn">

@@ -1,0 +1,9 @@
+.login {
+    text-align: center;
+    background-color: whitesmoke;
+    
+}
+
+.login h3{
+    background-image: url("image/sky.jpg");
+}
