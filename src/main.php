@@ -26,7 +26,7 @@
 	text-align: center;
 	border-bottom-style: dotted;
 	border-color: blue;
-	height: 300px;
+	height: 180px;
 	float: left;
 	width: 50%;
 	border-right-style: solid;
@@ -43,7 +43,7 @@
 .create {
 	margin: 0;
 	padding: 0;
-	height: 300px;
+	height: 180px;
 	border-bottom-style: dotted;
 	border-color: blue;
 	float: right;
@@ -55,9 +55,91 @@
 .crebtn{
 	width: 100px;
 	height: 60px;
+	margin-top: 60px;
+}
+.box{
+    margin-top: 260px;
+    margin-left: 100px;
+    width: 1300px;
 	
-	
-	margin-top: 120px;
+}
+.box_1{
+    float: left;
+    width: 500px;
+    height: 250px;
+    margin-left:100px;
+    background-color:blue;
+}
+.box_2{
+    float: right;
+    width: 500px;
+    height: 250px;
+    margin-right:100px;
+    background-color:red;
+}
+.box_3{
+    float: left;
+    width: 500px;
+    height: 250px;
+    margin-left:100px;
+    margin-top:50px;
+    background-color:blue;
+}
+.box_4{
+    float: right;
+    width: 500px;
+    height: 250px;
+    margin-right:100px;
+    margin-top:50px;
+    background-color:red;
+}
+.box_5{
+    float: left;
+    width: 500px;
+    height: 250px;
+    margin-left:100px;
+    margin-top:50px;
+    background-color:blue;
+}
+.box_6{
+    float: right;
+    width: 500px;
+    height: 250px;
+    margin-right:100px;
+    margin-top:50px;
+    background-color:red;
+}
+.box_7{
+    float: left;
+    width: 500px;
+    height: 250px;
+    margin-left:100px;
+    margin-top:50px;
+    background-color:blue;
+}
+.box_8{
+    float: right;
+    width: 500px;
+    height: 250px;
+    margin-right:100px;
+    margin-top:50px;
+    background-color:red;
+}
+.box_9{
+    float: left;
+    width: 500px;
+    height: 250px;
+    margin-left:100px;
+    margin-top:50px;
+    background-color:blue;
+}
+.box_10{
+    float: right;
+    width: 500px;
+    height: 250px;
+    margin-right:100px;
+    margin-top:50px;
+    background-color:red;
 }
 </style>
 </head>
@@ -83,9 +165,7 @@ echo $userName;
 					<th>Gender</th>
 					<td align="left"><input type="radio" name="gender" value="male">
 					Male</td>
-				</tr>
-				<tr>
-					<td></td>
+				
 					<td align="left"><input type="radio" name="gender" value="female">
 					Female</td>
 				</tr>
@@ -93,13 +173,11 @@ echo $userName;
 					<th>Hobby</th>
 					<td align="left"><input type="checkbox" name="interests[]" value="music">
 					Music</td>
-				</tr>
-				<tr>
-					<td></td>
+				
+					
 					<td align="left"><input type="checkbox" name="interests[]" value="game">
 					Game</td>
-				</tr>
-				<tr>
+				
 					<td></td>
 					<td align="left"><input type="checkbox" name="interests[]" value="film">
 					Film</td>
@@ -116,6 +194,20 @@ echo $userName;
 			<input type="submit" value="Create" class="crebtn">
 		</form>
 	</div>
-	
+
+	<div class = "box">
+	<div class = "box_1"></div>
+	<div class = "box_2"></div>
+	<div class = "box_3"></div>
+	<div class = "box_4"></div>
+	<div class = "box_5"></div>
+	<div class = "box_6"></div>
+	<div class = "box_7"></div>
+	<div class = "box_8"></div>
+	<div class = "box_9"></div>
+	<div class = "box_10"></div>
+	</div>
+
+
 </body>
 </html>

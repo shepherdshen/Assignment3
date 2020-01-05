@@ -5,7 +5,7 @@ class dbConnector{
     private static $mysql_servername = 'localhost';
     private static $mysql_username = 'root';
     private static $mysql_password = '';
-    private static $mysql_database = 'showyoursecretdb';
+    private static $mysql_database = 'assignment3';
     
     //connect to db
     public function connectDB(){
