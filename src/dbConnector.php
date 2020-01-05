@@ -33,20 +33,26 @@ class dbConnector{
         
         return mysqli_query($conn, $sql);
     }
-//     public function queryUserId($conn,$userName){
-//         $sql = "select user_id from user where user_name = '$userName'";
-//         return mysqli_query($conn, $sql);
-//     }
     public function confirmUserName($conn,$userName){
         $sql = "select user_name from user where user_name = '$userName'";
         return mysqli_query($conn, $sql);
     }
-    public function queryUserName($conn,$userId){
-        $sql = "select user_name from user where user_id = '$userId'";
-        return mysqli_query($conn, $sql);
+    public function queryUserName($conn,$id){
+        $sql = "select user_id from secret where secret_id = '$id'";
+        $result = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            $user_id = $row['user_id'];
+        }
+        $sql2 = "select user_name from user where user_id = '$user_id'";
+        return mysqli_query($conn, $sql2);
     }
-    public function querySecretContent($conn,$secretContent){
-        $sql = "select secret_content from secret where secret_content = '$secretContent'";
+//     public function querySecretContent($conn,$secretContent){
+//         $sql = "select secret_content from secret where secret_content = '$secretContent'";
+//         return mysqli_query($conn, $sql);
+//     }
+    public function querySecret($conn,$id){
+        $sql = "select secret_content from secret where secret_id = '$id'";
         return mysqli_query($conn, $sql);
     }
     
@@ -55,9 +61,6 @@ class dbConnector{
         return mysqli_query($conn, $sql);
     }
     public function insertSecret($conn,$userName,$secretContent,$anonymous){
-//         $userId = self::queryUserId($conn,$userName);
-//         $sql = "insert into secret values(null, $userId,'$secretContent',null,'$anonymous')";
-//         return mysqli_query($conn, $sql);
         $sql = "insert into secret(secret_id,user_id,secret_content,create_time,anonymous) values(null, (select user_id from user where user_name = '$userName'),'$secretContent',null,'$anonymous')";
         return mysqli_query($conn, $sql);
     }
