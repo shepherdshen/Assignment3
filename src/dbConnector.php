@@ -2,10 +2,10 @@
 class dbConnector{
     
     //Please input YOUR database info
-    protected static $mysql_servername = 'localhost';
-    protected static $mysql_username = 'root';
-    protected static $mysql_password = '';
-    protected static $mysql_database = 'assignment3';
+    private static $mysql_servername = 'localhost';
+    private static $mysql_username = 'root';
+    private static $mysql_password = '';
+    private static $mysql_database = 'showyoursecretdb';
     
     //connect to db
     public function connectDB(){
@@ -33,10 +33,10 @@ class dbConnector{
         
         return mysqli_query($conn, $sql);
     }
-    public function queryUserId($conn,$userName){
-        $sql = "select user_id from user where user_name = '$userName'";
-        return mysqli_query($conn, $sql);
-    }
+//     public function queryUserId($conn,$userName){
+//         $sql = "select user_id from user where user_name = '$userName'";
+//         return mysqli_query($conn, $sql);
+//     }
     public function confirmUserName($conn,$userName){
         $sql = "select user_name from user where user_name = '$userName'";
         return mysqli_query($conn, $sql);
@@ -54,9 +54,11 @@ class dbConnector{
         $sql = "insert into user values(null, '$userName', '$password', '$gender', '$interests', '$myPictureName', '$remark')";
         return mysqli_query($conn, $sql);
     }
-    public function insertSecret($conn,$userName,$secretContent){
-        $userId = queryUserId($conn,$userName);
-        $sql = "insert into secret values(null, '$userId','$secretContent',null)";
+    public function insertSecret($conn,$userName,$secretContent,$anonymous){
+//         $userId = self::queryUserId($conn,$userName);
+//         $sql = "insert into secret values(null, $userId,'$secretContent',null,'$anonymous')";
+//         return mysqli_query($conn, $sql);
+        $sql = "insert into secret(secret_id,user_id,secret_content,create_time,anonymous) values(null, (select user_id from user where user_name = '$userName'),'$secretContent',null,'$anonymous')";
         return mysqli_query($conn, $sql);
     }
 }
