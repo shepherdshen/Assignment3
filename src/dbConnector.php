@@ -47,15 +47,18 @@ class dbConnector{
         $sql2 = "select user_name from user where user_id = '$user_id'";
         return mysqli_query($conn, $sql2);
     }
-//     public function querySecretContent($conn,$secretContent){
-//         $sql = "select secret_content from secret where secret_content = '$secretContent'";
-//         return mysqli_query($conn, $sql);
-//     }
-    public function querySecret($conn,$id){
+    public function querySecretById($conn,$id){
         $sql = "select secret_content from secret where secret_id = '$id'";
         return mysqli_query($conn, $sql);
     }
-    
+    public function querySecret($conn){
+        $sql = "select * from secret";
+        return mysqli_query($conn, $sql);
+    }
+    public function queryAnonymous($conn,$id){
+        $sql = "select anonymous from secret where secret_id = '$id'";
+        return mysqli_query($conn, $sql);
+    }
     public function insertUserInfo($conn,$userName,$password,$gender,$interests,$myPictureName,$remark){
         $sql = "insert into user values(null, '$userName', '$password', '$gender', '$interests', '$myPictureName', '$remark')";
         return mysqli_query($conn, $sql);

@@ -160,24 +160,40 @@ session_start();
 
 require_once ("dbConnector.php");
 
-$userName = $_SESSION['userName'];
+$userName = $_SESSION['userName'];   //need refactor
 echo "hello,";
 echo $userName;
 
+global $connection;
+$connection = new dbConnector();
+global $conn;
+$conn = $connection ->connectDB();
+$number = mysqli_num_rows($connection->querySecret($conn));
+$GLOBALS['i'] = $number;
 function Output(){
-    $connection = new dbConnector();
-    $conn = $connection ->connectDB();
-    $result1 = $connection->queryUserName($conn, 1);
-    while ($row = mysqli_fetch_assoc($result1))
+    global $connection,$conn;
+    $resultUserName = $connection->queryUserName($conn, $GLOBALS['i']);
+    while ($row = mysqli_fetch_assoc($resultUserName))
     {
-        echo "Username : {$row['user_name']} <br>";
+        $resultAnonymous = $connection->queryAnonymous($conn, $GLOBALS['i']);
+        while ($rowAnonymous = mysqli_fetch_assoc($resultAnonymous))
+        {
+            $anonymous = $rowAnonymous['anonymous'];
+            if($anonymous == "yes"){
+                echo "Username : Anonymous<br>";
+            }
+            else 
+                echo "Username : {$row['user_name']} <br>";
+        }
     }
     
-    $result2 = $connection->querySecret($conn, 1);
-    while ($row = mysqli_fetch_assoc($result2))
+    $resultSecret = $connection->querySecretById($conn, $GLOBALS['i']);
+    while ($row = mysqli_fetch_assoc($resultSecret))
     {
         echo "Secret: {$row['secret_content']} <br>";
     }
+    echo $GLOBALS['i']; //can be hidden
+    $GLOBALS['i']--;
 }
 ?>
 
@@ -221,13 +237,21 @@ function Output(){
 			<span><?php Output(); ?></span>
 		</div>
 	
-		<div class="box_2"></div>
+		<div class="box_2">
+			<span><?php Output(); ?></span>
+		</div>
 
-		<div class="box_3"></div>
+		<div class="box_3">
+			<span><?php Output(); ?></span>
+		</div>
 
-		<div class="box_4"></div>
+		<div class="box_4">
+			<span><?php Output(); ?></span>
+		</div>
 
-		<div class="box_5"></div>
+		<div class="box_5">
+			<span><?php Output(); ?></span>
+		</div>
 
 		<div class="box_6"></div>
 
