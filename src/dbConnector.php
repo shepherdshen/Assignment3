@@ -89,15 +89,29 @@ class dbConnector
      * @param $secret_id
      * @return string|"anonymous" or user_name
      */
-    public function queryUserName($conn, $secret_id)
+    public function queryUserName($conn, $secret_id, $gender, $interests)
     {
         $sql = "select user_id from secret where secret_id = '$secret_id'";
         $result = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_assoc($result)) {
             $user_id = $row['user_id'];
         }
-        $sql2 = "select user_name from user where user_id = '$user_id'";
+        if($gender ==""){
+            if($interests ==""){
+                $sql2 = "select user_name from user where user_id = '$user_id'";
+            } else
+                $sql2 = "select user_name from user where user_id = '$user_id' and interests = '$interests'";
+        } else{
+            if($interests ==""){
+                $sql2 = "select user_name from user where user_id = '$user_id' and gender = '$gender'";
+            } else
+                $sql2 = "select user_name from user where user_id = '$user_id' and interests = '$interests' and gender = '$gender'";
+        }
+        
         $result2 = mysqli_query($conn, $sql2);
+        if($result2==false){
+            return "";
+        }else
         while ($row2 = mysqli_fetch_assoc($result2)) {
             $sql3 = "select anonymous from secret where secret_id = '$secret_id'";
             $result3 = mysqli_query($conn, $sql3);
@@ -179,7 +193,7 @@ class dbConnector
      */
     public function insertSecret($conn, $userName, $secretContent, $anonymous)
     {
-        $sql = "insert into secret(secret_id,user_id,secret_content,create_time,anonymous) values(null, (select user_id from user where user_name = '$userName'),'$secretContent','$anonymous')";
+        $sql = "insert into secret(secret_id,user_id,secret_content,anonymous) values(null, (select user_id from user where user_name = '$userName'),'$secretContent','$anonymous')";
         return mysqli_query($conn, $sql);
     }
 }

@@ -10,7 +10,15 @@
 	margin: 0;
 	padding: 0;
 }
-
+.top {
+    height: 70px;
+	border-bottom-style: dotted;
+	border-color: blue;
+}
+.img {
+    float:left;
+    height:70px;
+}
 .hello {
 	text-align: right;
 	font-size: 35px;
@@ -152,8 +160,10 @@
 </style>
 </head>
 <body>
+<div class = "top">
+    <div class = "img"><img alt="logo" src="image/logo.png"></div>
 	<div class="hello">
-		<img alt="logo" src="image/logo.png">
+
 <?php
 // The main page after login
 session_start();
@@ -161,34 +171,57 @@ $userName = $_SESSION['userName']; // need refactor
 echo "hello,";
 echo $userName;
 
+
 // function Output() to display all secrets
 require_once ("dbConnector.php");
 global $connection;
 $connection = new dbConnector();
 global $conn;
 $conn = $connection->connectDB();
-$number = $connection->querySecret($conn);
+$number = $connection->querySecretNumber($conn);
 $GLOBALS['i'] = $number;
 
 function Output()
 {
+    $gender = "";
+    $interests = "";
+    //get posts from main.php
+    if (isset($_POST['filter'])) {
+        if (empty($_POST['gender'])){
+            $gender = "";
+        }
+        else {
+            $gender = $_POST['gender'];
+        }
+        if (empty($_POST['interests'])) {
+            $interests = "";
+        } else {
+            $interests = implode(";", $_POST['interests']);
+        }
+    }
     if ($GLOBALS['i'] <= 0) {
         exit();
     }
     global $connection, $conn;
-    $resultUserName = $connection->queryUserName($conn, $GLOBALS['i']);
-    echo "Username: $resultUserName <br>";
-
+    $resultUserName = $connection->queryUserName($conn, $GLOBALS['i'],$gender,$interests);
     $resultSecret = $connection->querySecretById($conn, $GLOBALS['i']);
-    echo "Secret: $resultSecret <br>";
-    echo $GLOBALS['i']; // can be hidden
-    $GLOBALS['i'] --;
+        
+    if($resultUserName == ""){
+        $GLOBALS['i'] --;
+        Output();   
+    }else{
+        echo "Username: $resultUserName <br>";
+        echo "Secret: $resultSecret <br>";
+        echo $GLOBALS['i']; // can be hidden
+        $GLOBALS['i'] --;
+    }
 }
-?>
 
+?>
+</div>
 </div>
 	<div class="filter">
-		<form action=filter.php method="POST">
+		<form action=main.php method="POST">
 			<table align="center">
 				<caption>Filter</caption>
 				<tr>
@@ -209,7 +242,7 @@ function Output()
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="submit" value="Filter" class="filbtn"></td>
+					<td><input type="submit" name="filter" value="Filter" class="filbtn"></td>
 				</tr>
 			</table>
 		</form>

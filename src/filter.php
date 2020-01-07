@@ -1,5 +1,7 @@
 <?php
 require_once ("dbConnector.php");
+global $connection;
+global $conn;
 $connection = new dbConnector();
 $conn = $connection ->connectDB();
 
@@ -10,3 +12,6 @@ if (empty($_POST['interests'])) {
 } else {
     $interests = implode(";", $_POST['interests']);
 }
+
+$number = $connection->queryFilter($conn,$gender,$interests);
+$GLOBALS['i'] = $number;
