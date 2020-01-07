@@ -5,21 +5,24 @@
 </head>
 <body>
 	<div class="login">
-		<h3>User login</h3>
+	<img alt="logo" src="image/logo.png">
 		<form action="login.php" method="post">
 		<div id="login_form">
+			
+			<h2>Username:</h2>
 			<p>
-				<label>User name:</label> <input type="text" class="input"
+				<input type="text" class="input"
 					name="userName" id="userName" />
 			</p>
+			<h2>Password:</h2>
 			<p>
-				<label>Password:</label> <input type="password" class="input"
+				<input type="password" class="input"
 					name="password" id="password" />
 			</p>
+			
 			<div class="sub">
 				<input type="submit" name="login" class="btn" value="Login" />
 				<input type="button" onclick="window.location.href='register.html'" value="Register">
-			</div>
 		</div>
 		</form>
 	</div>
