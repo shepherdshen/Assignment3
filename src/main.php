@@ -167,7 +167,7 @@ global $connection;
 $connection = new dbConnector();
 global $conn;
 $conn = $connection->connectDB();
-$number = mysqli_num_rows($connection->querySecret($conn));
+$number = $connection->querySecret($conn);
 $GLOBALS['i'] = $number;
 
 function Output()
@@ -177,26 +177,14 @@ function Output()
     }
     global $connection, $conn;
     $resultUserName = $connection->queryUserName($conn, $GLOBALS['i']);
-    while ($row = mysqli_fetch_assoc($resultUserName)) {
-        $resultAnonymous = $connection->queryAnonymous($conn, $GLOBALS['i']);
-        while ($rowAnonymous = mysqli_fetch_assoc($resultAnonymous)) {
-            $anonymous = $rowAnonymous['anonymous'];
-            if ($anonymous == "yes") {
-                echo "Username : Anonymous<br>";
-            } else
-                echo "Username : {$row['user_name']} <br>";
-        }
-    }
+    echo "Username: $resultUserName <br>";
 
     $resultSecret = $connection->querySecretById($conn, $GLOBALS['i']);
-    while ($row = mysqli_fetch_assoc($resultSecret)) {
-        echo "Secret: {$row['secret_content']} <br>";
-    }
+    echo "Secret: $resultSecret <br>";
     echo $GLOBALS['i']; // can be hidden
     $GLOBALS['i'] --;
 }
 ?>
-
 
 </div>
 	<div class="filter">

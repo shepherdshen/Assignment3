@@ -25,7 +25,7 @@ if ($userName == '') {
 }
 // check if username is occupied
 $resultSet = $connection->confirmUserName($conn, $userName);
-if (mysqli_num_rows($resultSet) > 0) {
+if ($resultSet) {
     echo '<script>alert("The username is occupied");history.go(-1);</script>';
     exit(0);
 }
