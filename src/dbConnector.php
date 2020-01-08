@@ -158,12 +158,16 @@ class dbConnector
      * @param $user_id
      * @return string
      */
-    public function queryMyPictureName($conn,$user_id){
-        $sql = "select my_picture_name from user where user_id = '$user_id'";
+    public function queryMyPictureName($conn,$user_name){
+        $sql = "select my_picture_name from user where user_name = '$user_name'";
         $result = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_assoc($result)) {
-            return $row['my_picture_name'];
-        }
+            $pictureName = $row['my_picture_name'];
+            if($pictureName ==""){
+                return "default.jpg";
+            }
+            else return $pictureName;
+        }   
     }
     
     /**

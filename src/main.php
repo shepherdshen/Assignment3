@@ -19,6 +19,12 @@
     float:left;
     height:70px;
 }
+img{
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%; 
+}
 .hello {
 	text-align: right;
 	font-size: 35px;
@@ -165,22 +171,24 @@
 	<div class="hello">
 
 <?php
-// The main page after login
-session_start();
-$userName = $_SESSION['userName']; // need refactor
-echo "hello,";
-echo $userName;
-
-
-// function Output() to display all secrets
+// connect to db
 require_once ("dbConnector.php");
 global $connection;
 $connection = new dbConnector();
 global $conn;
 $conn = $connection->connectDB();
+
+session_start();
+$userName = $_SESSION['userName']; // need refactor
+
+$pictureName = $connection->queryMyPictureName($conn, $userName);
+echo "<img src='uploads/$pictureName' />";
+echo "hello,";
+echo $userName;
+
+// function Output() to display all secrets
 $number = $connection->querySecretNumber($conn);
 $GLOBALS['i'] = $number;
-
 function Output()
 {
     $gender = "";
