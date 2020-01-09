@@ -5,7 +5,7 @@
 </head>
 <body>
 	<div class="login">
-		<h3>User login</h3>
+		<img alt="logo" src="image/logo.png">
 		<form action="login.php" method="post">
 		<div id="login_form">
 			<p>
