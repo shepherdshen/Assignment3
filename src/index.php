@@ -5,7 +5,11 @@
 </head>
 <body>
 	<div class="login">
-	<img alt="logo" src="image/logo.png">
+	<a href="index.php"><img src="image/logo.png" /></a>
+	
+
+		
+
 		<form action="login.php" method="post">
 		<div id="login_form">
 			

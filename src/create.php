@@ -10,14 +10,13 @@
 </head>
 <body>
 <div class = "hello">
-<img alt="logo" src="image/logo.png">
+<a href="/my_php/Assignment3/src/main.php"><img src="image/logo.png" /></a>
 <?php
 // The create page after main page
 session_start();
 $userName = $_SESSION['userName'];
 
-echo "hello,";
-echo $userName;
+
 ?>
 </div>
 <div class = "text">

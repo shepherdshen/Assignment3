@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2020-01-03 15:26:16
+-- 生成日期： 2020-01-07 20:27:22
 -- 服务器版本： 10.4.8-MariaDB
 -- PHP 版本： 7.3.11
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 数据库： `assignment3`
+-- 数据库： `showyoursecretdb`
 --
 
 -- --------------------------------------------------------
@@ -32,8 +32,27 @@ CREATE TABLE `secret` (
   `secret_id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
   `secret_content` varchar(225) NOT NULL,
-  `create_time` timestamp NULL DEFAULT NULL
+  `anonymous` enum('yes','no') NOT NULL DEFAULT 'no'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `secret`
+--
+
+INSERT INTO `secret` (`secret_id`, `user_id`, `secret_content`, `anonymous`) VALUES
+(1, 1, 'first secret', 'yes'),
+(2, 1, 'second secret', 'no'),
+(3, 1, 'third secret', 'yes'),
+(4, 1, '4th', 'no'),
+(5, 1, '5th', 'yes'),
+(6, 1, '6th', 'no'),
+(7, 1, '7th', 'no'),
+(8, 1, '8th', 'no'),
+(9, 1, '9th', 'no'),
+(10, 1, '10th', 'no'),
+(11, 1, '11th', 'no'),
+(12, 1, '12th', 'yes'),
+(13, 2, '13th', 'no');
 
 -- --------------------------------------------------------
 
@@ -44,11 +63,11 @@ CREATE TABLE `secret` (
 CREATE TABLE `user` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `user_name` varchar(20) NOT NULL,
-  `password` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `gender` enum('male','female') CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `interests` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `my_picture_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `remark` text CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL
+  `password` varchar(30) NOT NULL,
+  `gender` enum('male','female') DEFAULT NULL,
+  `interests` varchar(100) DEFAULT NULL,
+  `my_picture_name` varchar(100) DEFAULT NULL,
+  `remark` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -56,11 +75,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `password`, `gender`, `interests`, `my_picture_name`, `remark`) VALUES
-(7, 'admin', 'admin', 'male', 'music', '', 'hello moto'),
-(8, 'sjs', 'sjs', 'male', '', '', ''),
-(9, 'yyf', 'yyf', 'male', '', '', ''),
-(10, 'test', 'test', 'male', '', '', ''),
-(11, 'test1', 'test1', 'male', '', '', '');
+(1, 'admin', 'admin', 'male', 'music', '', 'hello'),
+(2, 'sjs', 'sjs', 'male', 'game', '', ''),
+(3, 'test12', 'test12', 'male', '', '', ''),
+(4, 'test13', 'test13', 'male', '', '', '');
 
 --
 -- 转储表的索引
@@ -87,13 +105,13 @@ ALTER TABLE `user`
 -- 使用表AUTO_INCREMENT `secret`
 --
 ALTER TABLE `secret`
-  MODIFY `secret_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `secret_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- 使用表AUTO_INCREMENT `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- 限制导出的表

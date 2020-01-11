@@ -21,8 +21,7 @@ if (isset($_POST['login'])) { // login function
         exit();
     }
 
-    $number = mysqli_num_rows($connection->confirmLogin($conn,$userName,$password));
-    if ($number > 0) {
+    if ($connection->confirmLogin($conn,$userName,$password)) {
         $_SESSION['userName']=$userName;
         echo '<script>window.location="main.php";</script>';
     } else {
