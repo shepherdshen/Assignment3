@@ -14,15 +14,15 @@ if(empty($_POST['anonymous'])){
 
 //validation
 if (empty($_POST)) {
-    echo '<script>alert("Your data is over post_max_sizem please try again");history.go(-1);</script>';
+    echo '<script>alert("Your data is over post_max_sizem please try again");window.location="create.php";</script>';
     exit();
 }
 if ($message == '') {
-    echo '<script>alert("You have no secret!");history.go(-1);</script>';
+    echo '<script>alert("You have no secret!");window.location="create.php";</script>';
     exit();
 }
 if (strlen($message)>255) {
-    echo '<script>alert("You can most input 255 characters!");history.go(-1);</script>';
+    echo '<script>alert("You can most input 255 characters!");window.location="create.php";</script>';
     exit();
 }
 //uploads user information to database

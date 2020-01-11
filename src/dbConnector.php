@@ -93,6 +93,10 @@ class dbConnector
     {
         $sql = "select user_id from secret where secret_id = '$secret_id'";
         $result = mysqli_query($conn, $sql);
+        $number = mysqli_num_rows($result);
+        if ($number == 0) {
+            return "";
+        } else{
         while ($row = mysqli_fetch_assoc($result)) {
             $user_id = $row['user_id'];
         }
@@ -124,7 +128,9 @@ class dbConnector
             }
         }
     }
+    }
 
+    
     /**
      * query secret_content by secret_id
      * @param $conn
@@ -140,6 +146,28 @@ class dbConnector
         }
     }
 
+    public function queryYourSecretById($conn, $secret_id,$userName)
+    {
+        $sql0 = "select user_id from secret where secret_id = '$secret_id'";
+        $result = mysqli_query($conn, $sql0);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $user_id = $row['user_id'];
+            $sql1 = "select user_name from user where user_id = '$user_id'";
+            $result = mysqli_query($conn, $sql1);
+            while ($row1 = mysqli_fetch_assoc($result)) {
+                $user_name = $row1['user_name'];
+            }
+            if($user_name==$userName){
+                $sql = "select secret_content from secret where secret_id = '$secret_id'";
+                $result = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_assoc($result)) {
+                    return $row['secret_content'];
+                }
+            }else return "";
+        }
+        
+        
+    }
     /**
      * query number of secrets in db
      * @param $conn
@@ -147,9 +175,11 @@ class dbConnector
      */
     public function querySecretNumber($conn)
     {
-        $sql = "select * from secret";
-        $number = mysqli_num_rows(mysqli_query($conn, $sql));
-        return $number;
+        $sql = "select MAX(secret_id) as max_id from secret";
+        $result = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            return $row['max_id'];
+        }
     }
 
     /**
@@ -176,11 +206,27 @@ class dbConnector
      * @param $secret_id
      * @return
      */
-    public function deleteSecret($conn,$secret_id){
+    public function deleteSecretById($conn,$secret_id){
         $sql = "delete from secret where secret_id = '$secret_id'";
         return mysqli_query($conn, $sql);
     }
     
+    public function deleteSecret($conn,$user_name,$secret_content){
+        $sql = "select user_id from user where user_name = '$user_name'";
+        $result = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $user_id = $row['user_id'];
+            $sql2 = "delete from secret where user_id = '$user_id' and secret_content = '$secret_content'";
+            return mysqli_query($conn, $sql2);
+        }
+    }
+    
+    public function deleteSecretByAnonymous($conn,$secret_content){
+        
+            $sql = "delete from secret where secret_content = '$secret_content'";
+            return mysqli_query($conn, $sql);
+        
+    }
     /**
      * insert user
      * @param $conn

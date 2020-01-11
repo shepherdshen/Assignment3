@@ -35,3 +35,10 @@
 #input {
     font-size: 50%;
 }
+.bigdiv {
+	margin-top: 260px;
+	margin-left: 100px;
+	width: 1300px;
+	font-size: 30px;
+	text-align: center;
+}
