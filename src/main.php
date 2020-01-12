@@ -13,7 +13,6 @@
 		<div class="img">
 			<a href="main.php"><img alt="logo" src="image/logo.png"></a>
 		</div>
-
     	<div class="hello">
             <?php
             // connect to db
@@ -27,10 +26,12 @@
             $pictureName = $connection->queryMyPictureName($conn, $userName);
             $_SESSION['pictureName']=$pictureName;
             echo "<img src='uploads/$pictureName' />";
-            echo " Hello,";
+            echo " Hello, ";
             echo $userName;
             ?>
+            <a href="index.php">Log out</a>
         </div>
+        
 	</div>
 
 	<div class="filter">
@@ -91,12 +92,16 @@ function Output()
         }    
         global $connection, $conn;
         $resultUserName = $connection->queryUserName($conn, $GLOBALS['i'], $gender, $interests);
+        $resultPicture = $connection->queryMyPictureName($conn, $resultUserName);
         $resultSecret = $connection->querySecretById($conn, $GLOBALS['i']);
         if ($resultUserName == "") {
             $GLOBALS['i'] --;
             Output();
         } else {
             echo "<div style = 'float:left;width: 500px;height: 250px;margin-left: 100px;'>";
+            echo "<div style = 'float:left;width: 100px;height: 100px;'>";
+            echo "<img src='uploads/$resultPicture' />";
+            echo "</div>";
             echo "Username: $resultUserName <br>";
             echo "Secret: $resultSecret <br>";
             echo "</div>";

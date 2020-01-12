@@ -21,9 +21,10 @@
         $userName = $_SESSION['userName'];
         $pictureName = $_SESSION['pictureName'];
         echo "<img src='uploads/$pictureName' />";
-        echo " Hello,";
+        echo " Hello, ";
         echo $userName;
         ?>
+        <a href="index.php">Log out</a>
     </div>
 </div>
 <div class = "text">
@@ -66,7 +67,7 @@ function Output()
             echo "Secret: $resultSecret <br>";
             echo "<input type='hidden' name='userName' value='$userName'>";
             echo "<input type='hidden' name='secret' value='$resultSecret'>";
-            echo "<input type='submit' value='Delete'>";
+            echo "<input type='submit' style='width:100px; height:30px;' value='Delete'>";
             echo "</form>";
 //             echo $GLOBALS['i']; 
             echo "</div>";

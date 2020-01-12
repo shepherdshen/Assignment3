@@ -27,10 +27,6 @@ if (isset($_POST['login'])) { // login function
     } else {
         echo '<script>alert("Wrong username or password£¡");history.go(-1);</script>';
     }
-} elseif (isset($_POST['logout'])) { // logout function(not implement)
-    unset($_SESSION);
-    session_destroy();
-    echo '1';
 }
 
 $connection->closeDB($conn);

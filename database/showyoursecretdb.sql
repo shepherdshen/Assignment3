@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2020-01-07 20:27:22
+-- 生成日期： 2020-01-12 03:40:48
 -- 服务器版本： 10.4.8-MariaDB
 -- PHP 版本： 7.3.11
 
@@ -43,16 +43,12 @@ INSERT INTO `secret` (`secret_id`, `user_id`, `secret_content`, `anonymous`) VAL
 (1, 1, 'first secret', 'yes'),
 (2, 1, 'second secret', 'no'),
 (3, 1, 'third secret', 'yes'),
-(4, 1, '4th', 'no'),
-(5, 1, '5th', 'yes'),
-(6, 1, '6th', 'no'),
-(7, 1, '7th', 'no'),
-(8, 1, '8th', 'no'),
-(9, 1, '9th', 'no'),
-(10, 1, '10th', 'no'),
-(11, 1, '11th', 'no'),
-(12, 1, '12th', 'yes'),
-(13, 2, '13th', 'no');
+(15, 7, 'a new message!', 'no'),
+(17, 8, 'I did it!', 'yes'),
+(19, 1, 'good night', 'no'),
+(20, 9, '233333333333333333333333333333333333333333333333333333333333333333333333', 'no'),
+(21, 10, 'mikumikumikumikumikumikumikumikumikumikumikumikumikumikumikumikumikumikumikumikumikumikumikumiku', 'yes'),
+(22, 10, 'bilibilibilibilibilibilibilibilibilibilibilibilibilibilibilibilibilibilibilibilibilibilibilibili', 'no');
 
 -- --------------------------------------------------------
 
@@ -78,7 +74,13 @@ INSERT INTO `user` (`user_id`, `user_name`, `password`, `gender`, `interests`, `
 (1, 'admin', 'admin', 'male', 'music', '', 'hello'),
 (2, 'sjs', 'sjs', 'male', 'game', '', ''),
 (3, 'test12', 'test12', 'male', '', '', ''),
-(4, 'test13', 'test13', 'male', '', '', '');
+(4, 'test13', 'test13', 'male', '', '', ''),
+(5, 'sjs18', 'sjs18', 'female', 'music;game;film', '52835751_p0[1].png', 'haha'),
+(6, 'sjs19', 'sjs19', 'female', 'music;game', '', ''),
+(7, 'sjsnew', 'sjsnew', 'male', '', '', ''),
+(8, 'sjs111', 'sjs111', 'female', '', '', ''),
+(9, 'user', 'user', 'female', 'game;film', '61416604_p0_master1200[1].jpg', ''),
+(10, 'newbee', '123456', 'male', 'music;film', '185234fkjsjmmmimsafib2.jpg', '');
 
 --
 -- 转储表的索引
@@ -105,13 +107,13 @@ ALTER TABLE `user`
 -- 使用表AUTO_INCREMENT `secret`
 --
 ALTER TABLE `secret`
-  MODIFY `secret_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `secret_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- 使用表AUTO_INCREMENT `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- 限制导出的表

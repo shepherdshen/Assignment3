@@ -27,7 +27,7 @@ $conn = $connection->connectDB();
 $connection->deleteSecret($conn, $user_name, $secret_content);
 echo "Your secret has been deleted.";
 ?>
-<form action="main.php">
+<form action="create.php">
 <input type="submit" value="Back now" class="back">
 </form>
 </div>
