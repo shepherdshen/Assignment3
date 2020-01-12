@@ -9,19 +9,25 @@
 
 </head>
 <body onload = "output()">
-<div class = "hello">
-<img alt="logo" src="image/logo.png">
-<?php
-// The create page after main page
-session_start();
-global  $userName;
-$userName = $_SESSION['userName'];
-
-echo "hello,";
-echo $userName;
-?>
+<div class="top">
+	<div class="img">
+		<a href="main.php"><img src="image/logo.png" /></a>
+	</div>
+    <div class = "hello">
+        <?php
+        // The create page after main page
+        session_start();
+        global  $userName;
+        $userName = $_SESSION['userName'];
+        $pictureName = $_SESSION['pictureName'];
+        echo "<img src='uploads/$pictureName' />";
+        echo " Hello,";
+        echo $userName;
+        ?>
+    </div>
 </div>
 <div class = "text">
+<p><br></p>
 <form action="create_process.php" method="POST" enctype="multipart/form-data">
 <textarea name="message" rows="10" cols="150"></textarea><br>
 <input type="checkbox" name="anonymous" value="Anonymous">Anonymous<br>
@@ -30,23 +36,17 @@ echo $userName;
 </form>
 </div>
 <div id = "manydiv" class="bigdiv">
-<?php 
 
+<?php 
 $userName = $_SESSION['userName'];
 // connect to db
 require_once ("dbConnector.php");
-
 global $connection;
-
 $connection = new dbConnector();
-
 global $conn;
-
 $conn = $connection->connectDB();
 
 // function Output() to display all secrets
-
-
 $number = $connection->querySecretNumber($conn);
 $GLOBALS['i'] = $number;
 
@@ -82,7 +82,7 @@ function Output()
 
     function output(){
     var html1 = '';
-    html1 +="<div style='margin-top: 260px;margin-left: 100px;width: 1300px;font-size:30px;text-align:center;'><?php Output(); ?></div>";
+    html1 +="<div style='margin-top: 60px;margin-left: 100px;width: 1300px;font-size:30px;text-align:center;'><?php Output(); ?></div>";
     document.getElementById('manydiv').innerHTML = html1;
     }
     

@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="body">
-<img alt="logo" src="image/logo.png">
+<a href="index.php"><img alt="logo" src="image/logo.png"></a>
 </div>
 <div class = "con">  
 <?php
