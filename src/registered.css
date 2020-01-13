@@ -3,17 +3,19 @@
 	padding: 0;
 }
 
-body{
-    text-align:center;
-  }
-  .con{
+body {
+	text-align: center;
+}
+
+.con {
 	background-color: whitesmoke;
-  	font-size:120%;
- 	text-align:center;
-  }
-  .body {
-    text-align: right;
+	font-size: 120%;
+	text-align: center;
+}
+
+.body {
+	text-align: right;
 	font-size: 35px;
 	height: 70px;
-    background-image: url("image/sky.jpg");
-  }
+	background-image: url("image/sky.jpg");
+}

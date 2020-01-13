@@ -1,6 +1,11 @@
 <?php
-//uploads picture file
 class fileSystem{
+    /**
+     * uploads picture file and return case
+     * @param $file
+     * @param $filePath
+     * @return string
+     */
     public function upload($file, $filePath) {
         $error = $file['error'];
         switch ($error) {

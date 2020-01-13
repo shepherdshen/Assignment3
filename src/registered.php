@@ -8,20 +8,21 @@
 <title>Registered page</title>
 </head>
 <body>
-<div class="body">
-<a href="index.php"><img alt="logo" src="image/logo.png"></a>
-</div>
-<div class = "con">  
+	<div class="body">
+		<a href="index.php"><img alt="logo" src="image/logo.png"></a>
+	</div>
+	<div class="con">  
 <?php
+// a warning page to tell users they have managed to register
 session_start();
 $userName = $_SESSION['userName'];
 echo "Congratulations!<br>";
 echo "Your username is:" . $userName;
 ?>
 <form action="index.php">
-<input type="submit" value="Login now" class="back">
-</form>
-</div> 
+			<input type="submit" value="Login now" class="back">
+		</form>
+	</div>
 
 </body>
 </html>

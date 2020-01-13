@@ -45,6 +45,12 @@ class dbConnector
         mysqli_close($conn);
     }
 
+    /**
+     * a selective function to call mysqli_query in case of mistake
+     * @param $conn
+     * @param $string
+     * @return
+     */
     public function query($conn, $string)
     {
         return mysqli_query($conn, $string);
@@ -145,7 +151,14 @@ class dbConnector
             return $row['secret_content'];
         }
     }
-
+    
+    /**
+     * query secret_content of the current user
+     * @param $conn
+     * @param $secret_id
+     * @param $userName
+     * @return string
+     */
     public function queryYourSecretById($conn, $secret_id,$userName)
     {
         $sql0 = "select user_id from secret where secret_id = '$secret_id'";
@@ -160,13 +173,11 @@ class dbConnector
             if($user_name==$userName){
                 $sql = "select secret_content from secret where secret_id = '$secret_id'";
                 $result = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {              
                     return $row['secret_content'];
                 }
             }else return "";
-        }
-        
-        
+        }   
     }
     /**
      * query number of secrets in db
@@ -213,6 +224,13 @@ class dbConnector
         return mysqli_query($conn, $sql);
     }
     
+    /**
+     * delete secret by order
+     * @param $conn
+     * @param $user_name
+     * @param $secret_content
+     * @return 
+     */
     public function deleteSecret($conn,$user_name,$secret_content){
         $sql = "select user_id from user where user_name = '$user_name'";
         $result = mysqli_query($conn, $sql);
@@ -223,12 +241,6 @@ class dbConnector
         }
     }
     
-    public function deleteSecretByAnonymous($conn,$secret_content){
-        
-            $sql = "delete from secret where secret_content = '$secret_content'";
-            return mysqli_query($conn, $sql);
-        
-    }
     /**
      * insert user
      * @param $conn

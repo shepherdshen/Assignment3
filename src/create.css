@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 }
+
 .top {
 	height: 70px;
 	background-image: url("image/sky.jpg");
@@ -19,8 +20,6 @@
 	max-height: 80%;
 }
 
-
-
 .hello {
 	text-align: right;
 	font-size: 25px;
@@ -28,29 +27,31 @@
 }
 
 .text {
-   text-align: center;
-   font-size: 35px;
-   background-color: whitesmoke;
+	text-align: center;
+	font-size: 35px;
+	background-color: whitesmoke;
 }
+
 .btn {
-   width:5%;
-   height:100%;
+	width: 5%;
+	height: 100%;
 }
 
 .pretext {
-    background-color: whitesmoke;
-    text-align: center;
-    font-size: 40%;
+	background-color: whitesmoke;
+	text-align: center;
+	font-size: 40%;
 }
 
 .text textarea {
-    width: 39%;
-    height: 100%;
+	width: 39%;
+	height: 100%;
 }
 
 #input {
-    font-size: 50%;
+	font-size: 50%;
 }
+
 .bigdiv {
 	margin-top: 60px;
 	margin-left: 100px;

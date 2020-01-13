@@ -3,15 +3,16 @@ session_start();
 
 require_once ("dbConnector.php");
 $connection = new dbConnector();
-$conn = $connection ->connectDB();
+$conn = $connection->connectDB();
 
-//get posts from index.php
+// get posts from index.php
 $userName = $_POST['userName'];
 $password = $_POST['password'];
 
 if (isset($_POST['login'])) { // login function
     $userName = stripslashes(trim($userName));
     $password = stripslashes(trim($password));
+    // validation
     if (empty($userName)) {
         echo '<script>alert("Username can\'t be empty!");history.go(-1);</script>';
         exit();
@@ -21,8 +22,8 @@ if (isset($_POST['login'])) { // login function
         exit();
     }
 
-    if ($connection->confirmLogin($conn,$userName,$password)) {
-        $_SESSION['userName']=$userName;
+    if ($connection->confirmLogin($conn, $userName, $password)) {
+        $_SESSION['userName'] = $userName;
         echo '<script>window.location="main.php";</script>';
     } else {
         echo '<script>alert("Wrong username or password£¡");history.go(-1);</script>';

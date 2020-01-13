@@ -8,12 +8,12 @@
 <title>Main page</title>
 
 </head>
-<body onload ="output()">
+<body onload="output()">
 	<div class="top">
 		<div class="img">
 			<a href="main.php"><img alt="logo" src="image/logo.png"></a>
 		</div>
-    	<div class="hello">
+		<div class="hello">
             <?php
             // connect to db
             require_once ("dbConnector.php");
@@ -22,16 +22,16 @@
             global $conn;
             $conn = $connection->connectDB();
             session_start();
-            $userName = $_SESSION['userName']; 
+            $userName = $_SESSION['userName'];
             $pictureName = $connection->queryMyPictureName($conn, $userName);
-            $_SESSION['pictureName']=$pictureName;
+            $_SESSION['pictureName'] = $pictureName;
             echo "<img src='uploads/$pictureName' />";
             echo " Hello, ";
             echo $userName;
             ?>
             <a href="index.php">Log out</a>
-        </div>
-        
+		</div>
+
 	</div>
 
 	<div class="filter">
@@ -55,33 +55,32 @@
 						value="film"> Film</td>
 				</tr>
 			</table>
-			<input type="submit" name="filter" value="Filter"
-						class="filbtn">
+			<input type="submit" name="filter" value="Filter" class="filbtn">
 		</form>
 	</div>
 	<div class="create" align="center" vertical-align="middle">
 		<form action=create.php method="POST">
 			<input type="submit" value="Create" class="crebtn">
 		</form>
-	</div>	
+	</div>
 
-<div id = "morediv" class = "bigdiv">
-<?php 
-// function Output() to display all secrets
+	<div id="morediv" class="bigdiv">
+<?php
+// function to output one piece of username and secret,
+// which is used in output() in js as a loop to display all information
 $number = $connection->querySecretNumber($conn);
 $GLOBALS['i'] = $number;
+
 function Output()
 {
-    while($GLOBALS['i']>0)
-    {
+    while ($GLOBALS['i'] > 0) {
         $gender = "";
         $interests = "";
         // get posts from main.php
         if (isset($_POST['filter'])) {
             if (empty($_POST['gender'])) {
                 $gender = "";
-            } 
-            else {
+            } else {
                 $gender = $_POST['gender'];
             }
             if (empty($_POST['interests'])) {
@@ -89,7 +88,7 @@ function Output()
             } else {
                 $interests = implode(";", $_POST['interests']);
             }
-        }    
+        }
         global $connection, $conn;
         $resultUserName = $connection->queryUserName($conn, $GLOBALS['i'], $gender, $interests);
         $resultPicture = $connection->queryMyPictureName($conn, $resultUserName);
@@ -98,12 +97,17 @@ function Output()
             $GLOBALS['i'] --;
             Output();
         } else {
-            echo "<div style = 'float:left;width: 500px;height: 250px;margin-left: 100px;'>";
+            echo "<div style = 'float:left;width: 600px;height: 250px;margin-left: 150px;'>";
             echo "<div style = 'float:left;width: 100px;height: 100px;'>";
             echo "<img src='uploads/$resultPicture' />";
             echo "</div>";
             echo "Username: $resultUserName <br>";
-            echo "Secret: $resultSecret <br>";
+            echo "Secret: ";
+            $str_len = strlen($resultSecret);
+            for ($i = 0; $i <= $str_len; $i += 30) {
+                $sub_str = substr($resultSecret, $i, 30);
+                echo "$sub_str <br>";
+            }
             echo "</div>";
             $GLOBALS['i'] --;
         }
@@ -113,11 +117,11 @@ function Output()
 <script type="text/javascript">
 function output(){
     var html1 = '';
-    html1 +="<div style='margin-top: 260px;margin-left: 100px;width: 1300px;font-size:30px;text-align:center;'><?php Output(); ?></div>";
+    html1 +="<div style='margin-top: 260px;margin-left: 100px;width: 1600px;font-size:30px;text-align:center;'><?php Output(); ?></div>";
     document.getElementById('morediv').innerHTML = html1;
 }
 </script>
-</div>
+	</div>
 
 </body>
 </html>
